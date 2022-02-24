@@ -1,4 +1,4 @@
-# Perkins_Rivenes-2022-EDA-Project
+# Perkins-and-Rivenes-2022-EDA-Project
 
 ## Title
 
