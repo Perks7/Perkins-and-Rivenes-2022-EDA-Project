@@ -4,7 +4,9 @@ file_url<-"https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement
 file_name <- basename(file_url)
 
 if (!dir.exists("bird_data")) dir.create("bird_data")
+
 #if (!file.exists(file_name))
 download.file(file_url, destfile = "bird_data/bird_data.zip", mode = "wb")
+unzip("bird_data/bird_data.zip", overwrite = TRUE, exdir = "bird_data")
 
-read_excel("bird_data/bird_data.xlsx")
+read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
