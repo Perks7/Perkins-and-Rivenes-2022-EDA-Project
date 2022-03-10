@@ -12,3 +12,20 @@ unzip("bird_data/bird_data.zip", overwrite = TRUE, exdir = "bird_data")
 
 read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
 
+#rename dataset
+
+ATLANTIC_BIRD_TRAITS_completed_2018_11_d05
+bird_data<-ATLANTIC_BIRD_TRAITS_completed_2018_11_d05
+
+#renaming variables 
+
+bird_data <- rename(bird_data, body_mass_g = Body_mass.g., body_length_mm = Body_length.mm.,
+       altitude = Altitude)
+
+#New Variable
+length_width <- select(bird_data, body_length_mm, body_mass_g)
+
+length_width
+
+mutate(length_width, length_mass_ratio = body_length_mm / body_mass_g)
+
