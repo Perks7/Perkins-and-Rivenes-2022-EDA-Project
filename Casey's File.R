@@ -30,3 +30,8 @@ length_width<-mutate(bird_data, length_mass_ratio = body_length_mm / body_mass_g
 
 ggplot(data = length_width) +
   geom_point(mapping = aes(x = length_mass_ratio, y = altitude))
+
+#frequency table of authors
+bird_data%>%
+  count(ID_Res, name = "author_freq")%>% 
+  print(n = Inf)
