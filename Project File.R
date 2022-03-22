@@ -31,5 +31,4 @@ ggplot(data = length_width) +
 bird_data%>%
   count(ID_Res, name = "author_freq")%>% 
   print(n = Inf)
-
   geom_point(mapping = aes(x = length_mass_ratio, y = altitude))
