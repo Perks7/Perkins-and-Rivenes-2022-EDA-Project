@@ -9,7 +9,7 @@ library(tidyverse)
 
 # Title
 
-Authors
+Casey Perkins, Bryn Rivenes
 
 Affiliations
 
