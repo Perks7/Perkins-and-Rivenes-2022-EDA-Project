@@ -1,3 +1,4 @@
+
 library(tidyverse)
 
 file_url<-"https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2647&file=ecy2647-sup-0001-DataS1.zip"
@@ -9,12 +10,8 @@ if (!dir.exists("bird_data")) dir.create("bird_data")
 download.file(file_url, destfile = "bird_data/bird_data.zip", mode = "wb")
 unzip("bird_data/bird_data.zip", overwrite = TRUE, exdir = "bird_data")
 
-read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
-
-#rename data set
-
-ATLANTIC_BIRD_TRAITS_completed_2018_11_d05
-bird_data<-ATLANTIC_BIRD_TRAITS_completed_2018_11_d05
+#reading and renaming data
+bird_data<-read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
 
 #renaming variables 
 
@@ -35,3 +32,4 @@ ggplot(data = length_width) +
 bird_data%>%
   count(ID_Res, name = "author_freq")%>% 
   print(n = Inf)
+
