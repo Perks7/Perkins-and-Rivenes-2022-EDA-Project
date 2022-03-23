@@ -13,21 +13,60 @@ unzip("bird_data/bird_data.zip", overwrite = TRUE, exdir = "bird_data")
 bird_data<-read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
 
 #renaming variables 
-bird_data <- rename(bird_data, body_mass_g = Body_mass.g., body_length_mm = Body_length.mm.,
-                    altitude = Altitude, wing_length_mm = Wing_length.mm.)
+bird_data <- rename(bird_data, 
+                    body_mass_g = Body_mass.g., 
+                    body_length_mm = Body_length.mm., 
+                    altitude = Altitude, 
+                    wing_length_mm = Wing_length.mm.
+                    )
 
 #new variable
-length_width <- select(bird_data, body_length_mm, body_mass_g)
+length_vs_mass <- select(bird_data, body_length_mm, body_mass_g)
 
-length_width <- mutate(bird_data, length_mass_ratio = body_length_mm / body_mass_g)
+length_vs_mass <- mutate(bird_data, 
+                         length_mass_ratio = body_length_mm / body_mass_g)
 
-#ggplot
-ggplot(data = length_width) +
-  geom_point(mapping = aes(x = length_mass_ratio, y = altitude))
+#ggplot Length Mass Ratio vs Altitude 
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude)
+  )
+
+#ggplot Length Mass Ratio vs Altitude (color) 
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude, 
+    color = Order), 
+    alpha = 0.1
+  )
+
+#ggplot mass vs altitude (color)
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = body_mass_g, 
+    y = altitude, 
+    color = Order), 
+    alpha = 0.1
+  )
+
+
+#ggplot Wing Length vs Altitude (color)
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = wing_length_mm, 
+    y = altitude,
+    color = Order),
+    alpha = 0.1
+  )
+
 
 #frequency table of authors
 bird_data%>%
   count(ID_Res, name = "author_freq")%>% 
   print(n = Inf)
-  geom_point(mapping = aes(x = length_mass_ratio, y = altitude))
-  
+geom_point(mapping = aes(
+  x = length_mass_ratio, 
+  y = altitude)
+)
