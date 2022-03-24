@@ -21,6 +21,8 @@ Affiliations
 
 ## Discussion
 
+We began with the question, "does altitude correlate with the mass to length ratio?" When first taking a look at the data we found that a frequency plot of our
+
 ## References
 
 -   Blackburn T, Ruggiero A. Latitude, elevation and body mass variation in Andean passerine birds. Global Ecology and Biography 2001 (cited 2022 Feb 18); 10: 245-259.

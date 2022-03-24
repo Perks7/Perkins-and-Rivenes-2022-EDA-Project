@@ -71,7 +71,7 @@ anseriforms_grouped <- group_by(length_width, Order)
 
 
 #length mass plot of anseriforms 
-length_width %>% 
+length_vs_mass %>% 
   filter(Order=="Anseriforms") %>% 
   ggplot() +
   geom_point(mapping = aes(
