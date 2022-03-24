@@ -56,7 +56,17 @@ ggplot(data = length_width) +
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_width) +
   geom_histogram(mapping = aes(x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order)
+
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_width) +
+  geom_histogram(mapping = aes(x = ln_lmr), bins = 100)+ 
   facet_wrap(~Order,scales = "free_y")
 
 #log of length_mass_ratio to correct right skew 
 length_width<-mutate(length_width, ln_lmr = log(length_mass_ratio))
+
+#notes
+#after doing the natural log and faceting the data by order, 
+#we found that aneseriformes were throwing adding the extra lump
+#in our data. 

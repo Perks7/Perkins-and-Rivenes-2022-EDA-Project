@@ -85,6 +85,12 @@ ggplot(data = length_vs_mass) +
 length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 
 #testing for normal distribution of length_mass_ratio
+ggplot(data = length_width) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order)
+
+#testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
     x = ln_lmr), bins = 100) + 
