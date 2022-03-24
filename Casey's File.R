@@ -30,10 +30,33 @@ ggplot(data = length_width) +
 
 #table of species frequency
 species_freq<-length_width%>%
-  group_by(Species)%>%
+  group_by(species)%>%
   summarize(n = n())
 
-#facet wrap graph by species
+#table of genus frequency
+genus_freq<-length_width%>%
+  group_by(Genus)%>%
+  summarize(n = n())
+
+#table of order frequency
+order_freq<-length_width%>%
+  group_by(Order)%>%
+  summarize(n = n())
+
+#facet wrap graph by order
 ggplot(data = length_width) +
   geom_point(mapping = aes(x = length_mass_ratio, y = altitude))+
-               facet_wrap(~Species)
+               facet_wrap(~Order)
+
+#density plot by order
+ggplot(data = length_width) +
+  geom_density(mapping = aes(x = length_mass_ratio, y = altitude))+
+  facet_wrap(~Order)
+
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_width) +
+  geom_histogram(mapping = aes(x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order,scales = "free_y")
+
+#log of length_mass_ratio to correct right skew 
+length_width<-mutate(length_width, ln_lmr = log(length_mass_ratio))
