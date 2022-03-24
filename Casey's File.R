@@ -80,10 +80,31 @@ length_width %>%
     )
 
 #ln_lmr vs altitude for passeriforms
-
+length_vs_mass %>% 
+  filter(Order=="Passeriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = body_length_mm, 
+    y = body_mass_g)
+  )
 #ln_lmr vs altitude for anseriformes
+length_vs_mass %>% 
+  filter(Order=="Anseriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = ln_lmr, 
+    y = altitude)
+  )
 
-
+#ln_lmr vs altitude for passeriforms
+length_vs_mass %>% 
+  filter(Order=="Passeriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = ln_lmr, 
+    y = altitude)
+    )
+    
 #notes
 #after doing the natural log and faceting the data by order, 
 #we found that aneseriformes were throwing adding the extra lump
