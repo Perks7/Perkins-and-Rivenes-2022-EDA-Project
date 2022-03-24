@@ -166,6 +166,38 @@ ggplot(data = length_vs_mass) +
     x = length_mass_ratio, 
     y = altitude))
 
+#length mass plot of anseriforms 
+length_width %>% 
+  filter(Order=="Anseriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = body_length_mm, 
+    y = body_mass_g)
+  )
 
+#length mass plot of passeriformes 
+length_vs_mass %>% 
+  filter(Order=="Passeriformes") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = body_length_mm, 
+    y = body_mass_g)
+  )
 
+#length mass ratio vs altitude Passeriformes
+length_vs_mass %>% 
+  filter(Order=="Passeriformes") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude)
+  )
 
+#length mass ratio vs altitude Anseriforms
+length_vs_mass %>% 
+  filter(Order=="Anseriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude)
+  )
