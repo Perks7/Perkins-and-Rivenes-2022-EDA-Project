@@ -23,8 +23,12 @@ Affiliations
 
 ## References
 
--   reference 1
+-   Blackburn T, Ruggiero A. Latitude, elevation and body mass variation in Andean passerine birds. Global Ecology and Biography 2001 (cited 2022 Feb 18); 10: 245-259.
 
--   reference 2
+-   Lamichhaney S, Han F, Berglund J, Wang C, Almén MS, Webster MT, Grant BR, Grant PR, Andersson L. A beak size locus in Darwin's finches facilitated character displacement during a drought. Science. 2016 (cited 2022 Feb 18);352(6284):470-4
+
+-   Landmann A, Winding N. Guild Organization and Morphology of High-Altitude Granivorous and Insectivorous Birds: Convergent Evolution in an Extreme Environment. Oikos. 2995 (cited 2022 Feb 18);73(2):237-250.
+
+-   Sun Y, Li M, Song G, Lei F, Li D, Wu Y. The Role of Climate Factors in Geographic Variation in Body Mass and Wing Length in a Passerine Bird. Avian Res. 2017 (cited 2022 Feb 19); 8, 1.
 
 ## Acknowledgments

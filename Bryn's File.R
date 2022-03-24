@@ -100,6 +100,43 @@ ggplot(data = length_vs_mass) +
 #NOTE: Maybe we should look at Annual_mean_temperature ? 
 #we could also look at latitude? (Latitude_decimal_degrees)
 
+#~~~ 
+#table of order frequency
+order_freq<-length_vs_mass%>%
+  group_by(Order)%>%
+  summarize(n = n())
+
+#facet wrap graph by order
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))+
+  facet_wrap(~Order)
+
+#density plot by order
+ggplot(data = length_vs_mass) +
+  geom_density(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))+
+  facet_wrap(~Order)
+
+#log of length_mass_ratio to correct right skew 
+length_vs_mass <-mutate(length_vs_mass, 
+                        ln_lmr = log(length_mass_ratio))
+
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order)
+
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100) + 
+  facet_wrap(~Order,scales = "free_y")
+#~~~~
+
 #ggplot freqpoly
 ggplot(data = length_vs_mass) +
   geom_freqpoly(mapping = aes(
@@ -111,9 +148,24 @@ ggplot(data = length_vs_mass) +
 length_vs_mass %>%
   count(length_mass_ratio)
 
-length_vs_mass %>%
-  ggplot(mapping = aes(x = length_mass_ratio, y = altitude)) +
+length_vs_mass %>%        #<- doesn't work
+  ggplot(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude)) +
   geom_tile(mapping = aes(fill = n))
 
+#geom_bin2d
 ggplot(data = length_vs_mass) +
-  geom_bin2d(mapping = aes(x = length_mass_ratio, y = altitude))
+  geom_bin2d(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))
+
+# install.packages("hexbin")
+ggplot(data = length_vs_mass) +
+  geom_hex(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))
+
+
+
+
