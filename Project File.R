@@ -96,4 +96,11 @@ ggplot(data = length_vs_mass) +
     x = ln_lmr), bins = 100) + 
   facet_wrap(~Order,scales = "free_y")
 
-
+#length mass plot of anseriforms 
+length_width %>% 
+  filter(Order=="Anseriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = body_length_mm, 
+    y = body_mass_g)
+  )

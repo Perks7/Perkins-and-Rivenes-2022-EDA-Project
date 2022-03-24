@@ -56,7 +56,7 @@ ggplot(data = length_width) +
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_width) +
   geom_histogram(mapping = aes(x = ln_lmr), bins = 100)+ 
-  facet_wrap(~Order)
+  facet_wrap(~Order)+
 
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_width) +
@@ -65,6 +65,24 @@ ggplot(data = length_width) +
 
 #log of length_mass_ratio to correct right skew 
 length_width<-mutate(length_width, ln_lmr = log(length_mass_ratio))
+
+#grouped table Anseriforms
+anseriforms_grouped <- group_by(length_width, Order)
+
+
+#length mass plot of anseriforms 
+length_width %>% 
+  filter(Order=="Anseriforms") %>% 
+  ggplot() +
+  geom_point(mapping = aes(
+    x = body_length_mm, 
+    y = body_mass_g)
+    )
+
+#ln_lmr vs altitude for passeriforms
+
+#ln_lmr vs altitude for anseriformes
+
 
 #notes
 #after doing the natural log and faceting the data by order, 
