@@ -63,24 +63,31 @@ ggplot(data = length_vs_mass) +
 
 
 #table of order frequency
-order_freq<-length_width%>%
+order_freq<-length_vs_mass%>%
   group_by(Order)%>%
   summarize(n = n())
 
 #facet wrap graph by order
-ggplot(data = length_width) +
-  geom_point(mapping = aes(x = length_mass_ratio, y = altitude))+
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))+
   facet_wrap(~Order)
 
 #density plot by order
-ggplot(data = length_width) +
-  geom_density(mapping = aes(x = length_mass_ratio, y = altitude))+
+ggplot(data = length_vs_mass) +
+  geom_density(mapping = aes(
+    x = length_mass_ratio, 
+    y = altitude))+
   facet_wrap(~Order)
 
+#log of length_mass_ratio to correct right skew 
+length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
+
 #testing for normal distribution of length_mass_ratio
-ggplot(data = length_width) +
-  geom_histogram(mapping = aes(x = ln_lmr), bins = 100)+ 
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100) + 
   facet_wrap(~Order,scales = "free_y")
 
-#log of length_mass_ratio to correct right skew 
-length_width<-mutate(length_width, ln_lmr = log(length_mass_ratio))
+

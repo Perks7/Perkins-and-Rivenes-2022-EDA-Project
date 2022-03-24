@@ -99,3 +99,21 @@ ggplot(data = length_vs_mass) +
   )
 #NOTE: Maybe we should look at Annual_mean_temperature ? 
 #we could also look at latitude? (Latitude_decimal_degrees)
+
+#ggplot freqpoly
+ggplot(data = length_vs_mass) +
+  geom_freqpoly(mapping = aes(
+    x = length_mass_ratio, 
+    color = Order)
+  )
+
+#ggplot geom_tile
+length_vs_mass %>%
+  count(length_mass_ratio)
+
+length_vs_mass %>%
+  ggplot(mapping = aes(x = length_mass_ratio, y = altitude)) +
+  geom_tile(mapping = aes(fill = n))
+
+ggplot(data = length_vs_mass) +
+  geom_bin2d(mapping = aes(x = length_mass_ratio, y = altitude))
