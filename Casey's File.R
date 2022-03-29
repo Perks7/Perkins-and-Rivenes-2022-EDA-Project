@@ -78,46 +78,93 @@ length_vs_mass %>%
     x = body_length_mm, 
     y = body_mass_g)
     )
-
-#ln_lmr vs altitude for passeriforms
+#ln_lmr vs altitude for Anseriformes
 length_vs_mass %>% 
-  filter(Order=="Passeriforms") %>% 
-  ggplot() +
-  geom_point(mapping = aes(
-    x = body_length_mm, 
-    y = body_mass_g)
-  )
-#ln_lmr vs altitude for anseriformes
-length_vs_mass %>% 
-  filter(Order=="Anseriforms") %>% 
+  filter(Order=="Anseriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = ln_lmr, 
     y = altitude)
   )
 
-#ln_lmr vs altitude for passeriforms
+#ln_lmr vs altitude for Passeriformes
 length_vs_mass %>% 
-  filter(Order=="Passeriforms") %>% 
+  filter(Order=="Passeriformes") %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+
+#fit line with altitude > 1000 Passeriformes
+length_vs_mass %>% 
+  filter(Order=="Passeriformes",
+         altitude >= 1000) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point(mapping = aes(color = Family)) +
+  geom_smooth(method = "loess") +
+  geom_text_repel(
+    mapping = aes(label = Family), 
+    data = length_vs_mass %>% 
+      filter(Order=="Passeriformes",
+             altitude >= 2000)
+  )
+
+# fit line of passeriformes: furnariidea altitude >1000 (color)
+length_vs_mass %>% 
+  filter(Order=="Passeriformes",
+         Family=="Furnariidae",
+         altitude >= 1000) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point(mapping = aes(color = Species)) +
+  geom_smooth(method = "lm")
+
+#fit line of passeriformes: furnariidea altitude >1000 
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+    altitude > 1000
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+# frequency distribution of mean ln_lmr in passeriformes
+length_vs_mass %>% 
+  filter(Order == "Passeriformes")%>% 
+  group_by(Order, Family, Genus, Species) %>% 
+  summarize(ln_lmr = mean(ln_lmr),
+            altitude = mean(altitude)) %>% 
   ggplot() +
-  geom_point(mapping = aes(
-    x = ln_lmr, 
-    y = altitude)
-    )
+  geom_histogram(aes(x = ln_lmr))
 
-#length_mass_ratio table
+#mean of ln_lmr vs altitude 
+length_vs_mass %>% 
+  group_by(Order, Family, Genus, Species) %>% 
+  summarize(ln_lmr = mean(ln_lmr),
+            altitude = mean(altitude)) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
 
-lmr_table<-length_vs_mass%>%
-  group_by(length_mass_ratio)%>%
-  summarize(n = n())
+#table of means above and below 1000 
+mean_table<-length_vs_mass%>% mutate(mean_ln_lmr = mean)
 
-#table of passeriformes
+# t-test for mean ln_lmr
+t.test()
 
 
     
 #notes
-#after doing the natural log and faceting the data by order, 
-#we found that aneseriformes were throwing adding the extra lump
-#in our data. 
-#take means of species and compare lower and higher elevations (1000)
 #
+#take means of species ln_lmr and compare lower and higher elevations (1000)
+#do t-test on means above and below 1000
