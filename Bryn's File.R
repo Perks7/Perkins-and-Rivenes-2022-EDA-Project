@@ -191,17 +191,19 @@ length_vs_mass %>%
   geom_point(mapping = aes(
     x = length_mass_ratio, 
     y = altitude,
-    alpha = .000001,
+    alpha = .001,
     color = Family)
   )
 
-#length mass ratio vs altitude Anseriforms
+#length mass ratio vs altitude Anseriformes        <- shows Amazonetta brasiliensis being weird
 length_vs_mass %>% 
   filter(Order=="Anseriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = length_mass_ratio, 
-    y = altitude)
+    y = altitude,
+    alpha = .001,
+    color = Species)
   )
 
 
@@ -212,3 +214,87 @@ length_vs_mass %>%
     geom_hex(mapping = aes(
       x = length_mass_ratio, 
       y = altitude))
+
+
+#ln_lmr vs altitude for Passeriformes
+length_vs_mass %>% 
+  filter(Order=="Passeriformes") %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude,
+    alpha = 0.01,
+    color = Family)) +
+  geom_point(
+  )
+
+
+#ln_lmr vs altitude for Passeriformes
+length_vs_mass %>% 
+  filter(Order=="Passeriformes") %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+
+#fit line with altitude > 1000 Passeriformes
+length_vs_mass %>% 
+  filter(Order=="Passeriformes",
+         altitude >= 1000) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point(mapping = aes(color = Family)) +
+  geom_smooth(method = "loess") +
+  geom_text_repel(
+    mapping = aes(label = Family), 
+    data = length_vs_mass %>% 
+      filter(Order=="Passeriformes",
+             altitude >= 2000)
+  )
+
+# fit line of passeriformes: furnariidea altitude >1000 (color)
+length_vs_mass %>% 
+  filter(Order=="Passeriformes",
+         Family=="Furnariidae",
+         altitude >= 1000) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point(mapping = aes(color = Species)) +
+  geom_smooth(method = "lm")
+
+#fit line of passeriformes: furnariidea altitude >1000 
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+    altitude > 1000
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+# frequency distribution of mean ln_lmr in passeriformes
+length_vs_mass %>% 
+  filter(Order == "Passeriformes")%>% 
+  group_by(Order, Family, Genus, Species) %>% 
+  summarize(ln_lmr = mean(ln_lmr),
+            altitude = mean(altitude)) %>% 
+  ggplot() +
+  geom_histogram(aes(x = ln_lmr))
+
+#mean of ln_lmr vs altitude 
+length_vs_mass %>% 
+  group_by(Order, Family, Genus, Species) %>% 
+  summarize(ln_lmr = mean(ln_lmr),
+            altitude = mean(altitude)) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+#
