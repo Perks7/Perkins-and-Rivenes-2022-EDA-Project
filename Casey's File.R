@@ -104,8 +104,20 @@ length_vs_mass %>%
     x = ln_lmr, 
     y = altitude)
     )
+
+#length_mass_ratio table
+
+lmr_table<-length_vs_mass%>%
+  group_by(length_mass_ratio)%>%
+  summarize(n = n())
+
+#table of passeriformes
+
+
     
 #notes
 #after doing the natural log and faceting the data by order, 
 #we found that aneseriformes were throwing adding the extra lump
 #in our data. 
+#take means of species and compare lower and higher elevations (1000)
+#
