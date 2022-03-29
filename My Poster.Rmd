@@ -11,9 +11,11 @@ library(tidyverse)
 
 Casey Perkins, Bryn Rivenes
 
-Affiliations
+Dr. Chris Merkord
 
 ## Introduction
+
+Ecogeographic rules explain variation within a species using biogeography. Allen's rule states that body surface-area-to-volume ratio for animals varies with the average temperature of their habitat. Typically, latitude is used as the temperature variable. However, this rule should hold true over any type of temperature variable. We want to know, is there a correlation between altitude and ratio of mass to length of birds in The Atlantic Forest? To answer this question, we will be using the Atlantic Bird Traits data set. This data set has been compiled over two centuries by tens of researchers (1820-2018) and includes data on 80% of the bird populations found in The Atlantic Forest. We will perform an exploratory analysis on this data set looking for correlations between altitude and ratio of mass to length of bird species. Based on other similar analyses, we expect to see a positive correlation between these variables.
 
 ## Methods
 
@@ -21,7 +23,9 @@ Affiliations
 
 ## Discussion
 
-We began with the question, "does altitude correlate with the mass to length ratio?" When first taking a look at the data we found that a frequency plot of our
+We began with the question, "does altitude correlate with the mass to length ratio?" We began with a simple frequency plot for our data. We found our data had a serious right skew. To correct for this, we took the natural log of all of our data points and re-plotted the data. We found the data had two peaks. To explore what might be causing this bimodal distribution, we separated the data out into frequency plots by order. This showed us the source of the smaller lump in our data was coming from a order of birds called Anseriformes (ducks). The larger lump in the data was caused by the order Passerifomes (songbirds). This makes sense because Passeriforme make up the majority of the known birds in the world.
+
+took our length to mass ratio (lmr) and plotted it as our x variable with altitude as our y variable. We found that the data was clustered together and difficult to read, so we separated each order out into its' own graph of altitude vs lmr. This resulted in a graph with
 
 ## References
 

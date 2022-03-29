@@ -106,7 +106,7 @@ length_vs_mass %>%
   )
 #length mass plot for Passeriformes
 length_vs_mass %>% 
-  filter(Order=="Passeriforms") %>% 
+  filter(Order=="Passeriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = body_length_mm, 
