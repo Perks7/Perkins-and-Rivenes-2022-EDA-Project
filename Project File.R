@@ -85,7 +85,7 @@ ggplot(data = length_vs_mass) +
 length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 
 #testing for normal distribution of length_mass_ratio
-ggplot(data = length_width) +
+ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
     x = ln_lmr), bins = 100)+ 
   facet_wrap(~Order)
@@ -96,7 +96,7 @@ ggplot(data = length_vs_mass) +
     x = ln_lmr), bins = 100) + 
   facet_wrap(~Order,scales = "free_y")
 
-#length mass plot of anseriforms 
+#length mass plot of Anseriformes 
 length_vs_mass %>% 
   filter(Order=="Anseriformes") %>% 
   ggplot() +
@@ -104,7 +104,7 @@ length_vs_mass %>%
     x = body_length_mm, 
     y = body_mass_g)
   )
-#length mass plot for passeriforms
+#length mass plot for Passeriformes
 length_vs_mass %>% 
   filter(Order=="Passeriforms") %>% 
   ggplot() +
@@ -122,7 +122,7 @@ length_vs_mass %>%
     y = altitude)
   )
 
-#length mass ratio vs altitude Anseriforms
+#length mass ratio vs altitude Anseriformes
 length_vs_mass %>% 
   filter(Order=="Anseriformes") %>% 
   ggplot() +
@@ -131,7 +131,7 @@ length_vs_mass %>%
     y = altitude)
   )
 
-#ln_lmr vs altitude for anseriformes
+#ln_lmr vs altitude for Anseriformes
 length_vs_mass %>% 
   filter(Order=="Anseriformes") %>% 
   ggplot() +
@@ -140,9 +140,9 @@ length_vs_mass %>%
     y = altitude)
   )
 
-#ln_lmr vs altitude for passeriforms
+#ln_lmr vs altitude for Passeriformes
 length_vs_mass %>% 
-  filter(Order=="Passeriforms") %>% 
+  filter(Order=="Passeriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = ln_lmr, 

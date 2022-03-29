@@ -168,7 +168,7 @@ ggplot(data = length_vs_mass) +
 
 #length mass plot of anseriforms 
 length_vs_mass %>% 
-  filter(Order=="Anseriforms") %>% 
+  filter(Order=="Anseriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = body_length_mm, 
@@ -197,7 +197,7 @@ length_vs_mass %>%
 
 #length mass ratio vs altitude Anseriforms
 length_vs_mass %>% 
-  filter(Order=="Anseriforms") %>% 
+  filter(Order=="Anseriformes") %>% 
   ggplot() +
   geom_point(mapping = aes(
     x = length_mass_ratio, 
