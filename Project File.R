@@ -247,3 +247,11 @@ passeriformes_means %>%
   t.test(ln_lmr ~ hilo, data = .)
 
 
+
+# antilog of means --------------------------------------------------------
+
+#antilog of hi
+exp(2.067247)
+
+#antilog of low
+exp(1.647261)
