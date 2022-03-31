@@ -64,8 +64,6 @@ Dr. Chris Merkord
 
 ## Results
 
--   one sentence description of conclusion
-
 ```{r, echo=FALSE, warning = FALSE}
 #ggplot Length Mass Ratio vs Altitude
 ggplot(data = length_vs_mass) +
@@ -76,7 +74,7 @@ ggplot(data = length_vs_mass) +
 
 ```
 
--   we ran our mass to length ratio with altitude and found we had very messy data
+-   We ran our mass to length ratio with altitude and found we had very messy data
 
 ```{r, echo=FALSE, warning = FALSE}
 #testing for normal distribution of length_mass_ratio
@@ -90,7 +88,7 @@ ggplot(data = length_vs_mass) +
   facet_wrap(~Order)
 ```
 
--   here we noticed that our data were severely right skewed
+-   Here we noticed that our data were severely right skewed
 
 ```{r, echo=FALSE, warning = FALSE}
 #log of length_mass_ratio to correct right skew 
@@ -103,7 +101,7 @@ ggplot(data = length_vs_mass) +
   facet_wrap(~Order)
 ```
 
--   we corrected the skew in our data by taking the natural log of our data points
+-   We corrected the skew in our data by taking the natural log of our data points
 
 ```{r, echo=FALSE, warning = FALSE}
 length_vs_mass %>% 
@@ -130,7 +128,7 @@ length_vs_mass %>%
   geom_smooth(method = "lm")
 ```
 
--   we plotted the mean lmr for each genus/species and saw a slight upward trend which intensified when we looked exclusivly at altitudes higher than 1000
+-   We plotted the mean lmr for each genus/species and saw a slight upward trend which intensified when we looked exclusivly at altitudes higher than 1000
 
     ```{r, echo=FALSE, warning = FALSE}
     passeriformes_means<-
@@ -163,7 +161,7 @@ length_vs_mass %>%
 
     ```
 
--   we took the mean lmr of birds found over 1000 m and birds found under 1000 and found the means were different
+-   We took the mean lmr of birds found over 1000 m and birds found under 1000 and found the means were different
 
     ```{r, include=FALSE, warning = FALSE}
     passeriformes_means %>% 
