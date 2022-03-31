@@ -174,6 +174,103 @@ length_vs_mass %>%
     x = ln_lmr), bins = 100) + 
   facet_wrap(~ Order)
     
+
+# Formatting graphs -------------------------------------------------------
+
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = length_mass_ratio), bins = 50, boundary = 0) +
+  labs(y = "Number of Birds", 
+       x = "Length:Mass") +
+  theme_gray(base_size = 24) +
+  ggsave("birds_lmr_histogram.png", units="in", height=8, width=12, dpi = 300)
+  
+#seperate by order
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = length_mass_ratio), bins = 50, boundary = 0) +
+  facet_wrap(~Order, ncol = 5) +
+  labs(y = "Number of Birds", 
+       x = "Length:Mass") +
+  theme_gray(base_size = 24) +
+  ggsave("birds_lmr_histogram_facetwrap_species.png", units="in", height=12, width=12, dpi = 300)
+  
+
+#testing for normal distribution of ln_lmr
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 50, boundary = 0) +
+  facet_wrap(~Order, ncol = 5) +
+  labs(y = "Number of Birds", 
+       x = "ln(Length:Mass)") +
+  theme_gray(base_size = 24) +
+  ggsave("birds_ln_lmr_histogram_facetwrap_species.png", units="in", height=12, width=12, dpi = 300)
+
+#mean ln_lmr/altitude 
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")+
+  labs(y = "ln(Length:Mass)", 
+       x = "Altitude (m)") +
+  theme_gray(base_size = 24) +
+  ggsave("altitude_ln(lmr).png", units="in", height=8, width=12, dpi = 300)
+
+#mean ln_lmr/altitude over 1000
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+    altitude > 1000
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(y = "ln(Length:Mass)", 
+       x = "Altitude (m)") +
+  theme_gray(base_size = 24) +
+  ggsave("altitude_ln(lmr)over1000.png", units="in", height=8, width=12, dpi = 300)
+ 
+
+#hilo means histograms
+passeriformes_means %>% 
+  mutate(hilo = ifelse(altitude>1000, "Above 1000 m", "Below 1000 m")) %>%
+  ggplot(aes(x = ln_lmr)) +
+  geom_histogram() +
+  geom_vline(aes(xintercept = mean), data = mean_hilo,
+             linetype = "dashed", size = 2, color = "red") +
+  facet_wrap(~ hilo, ncol = 1, scales = "free_y") +
+  labs(y = "Number of Birds", 
+       x = "Mean ln(Length:Mass)") +
+  theme_gray(base_size = 24) +
+  ggsave("birds_mean ln(length.png", units="in", height=8, width=12, dpi = 300)
+
+#species mean lmr_altitude 
+length_vs_mass %>% 
+  filter(Genus == "Turdus") %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude,
+    color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  xlim(c(0,1700))+ 
+  labs(x = "Altitude", 
+       y = "ln(Length:Mass)") +
+  theme_gray(base_size = 24) +
+  ggsave("turdus_ln(lmr)_altitude.png", units="in", height=8, width=12, dpi = 300)
+
+
+
+
 #notes
 #
 #take means of species ln_lmr and compare lower and higher elevations (1000)

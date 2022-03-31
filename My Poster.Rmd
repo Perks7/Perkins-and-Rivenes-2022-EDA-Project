@@ -69,8 +69,11 @@ Dr. Chris Merkord
 ggplot(data = length_vs_mass) +
   geom_point(mapping = aes(
     y = length_mass_ratio, 
-    x = altitude)
-  )
+    x = altitude)) +
+  labs(x = "Altitude",
+       y = "Length:Mass")+
+  theme_gray(base_size = 24) +
+ggsave("lmratio_altitude_scatter.png", units="in", height=8, width=12, dpi = 300)
 ```
 
 Figure 1. We ran our mass to length ratio with altitude and found we had very messy data
