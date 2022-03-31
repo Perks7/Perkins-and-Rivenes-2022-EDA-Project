@@ -153,8 +153,14 @@ length_vs_mass %>%
   ggplot(mapping = aes(
     y = ln_lmr, 
     x = altitude)) +
-  geom_point() +
-  geom_smooth(method = "lm")
+  geom_point(size=2) +
+  geom_smooth(method = "lm", size=2) +
+  theme_gray(base_size = 24) +
+  labs(
+    x = "Altitude",
+    y = "Mean ln(Length:Mass)"
+  )
+ggsave("species_altitude_scatter.png", units="in", height=8, width=12, dpi = 300)
 
 #table of means above and below 1000 
 mean_table<-length_vs_mass%>% mutate(mean_ln_lmr = mean)

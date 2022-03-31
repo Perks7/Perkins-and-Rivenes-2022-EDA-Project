@@ -31,43 +31,31 @@ Dr. Chris Merkord
 
 ## Results
 
--   one sentence description of conclusion
-
 ![](My-Poster_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
--   we ran our mass to length ratio with altitude and found we had very
-    messy data
+Figure 1. We ran our mass to length ratio with altitude and found we had
+very messy data
 
-![](My-Poster_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](My-Poster_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
-
--   here we noticed that our data were severely right skewed
+![](My-Poster_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ![](My-Poster_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
--   we corrected the skew in our data by taking the natural log of our
-    data points
-
-<!-- -->
-
-    ## `geom_smooth()` using formula 'y ~ x'
+-   Here we noticed that our data were severely right skewed
 
 ![](My-Poster_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-    ## `geom_smooth()` using formula 'y ~ x'
+-   We corrected the skew in our data by taking the natural log of our
+    data points
 
-![](My-Poster_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+![](My-Poster_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->![](My-Poster_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
--   we plotted the mean lmr for each genus/species and saw a slight
+-   We plotted the mean lmr for each genus/species and saw a slight
     upward trend which intensified when we looked exclusivly at
     altitudes higher than 1000
 
-        ## `summarise()` has grouped output by 'Order', 'Family', 'Genus'. You can
-        ## override using the `.groups` argument.
-        ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    ![](My-Poster_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
-    ![](My-Poster_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
-
--   we took the mean lmr of birds found over 1000 m and birds found
+-   We took the mean lmr of birds found over 1000 m and birds found
     under 1000 and found the means were different
 
 -   The mean lmr of birds found above 1000 m = 7.9 while the mean lmr of

@@ -47,7 +47,7 @@ length_vs_mass <- mutate(bird_data,
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
-    x = length_mass_ratio), bins = 100)
+    x = length_mass_ratio), bins = 50, boundary = 0)
  
 
 #ggplot Length Mass Ratio vs Altitude
@@ -82,8 +82,8 @@ length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
-    x = ln_lmr), bins = 100)+ 
-  facet_wrap(~Order)
+    x = ln_lmr), bins = 100) 
+  
 
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
@@ -210,6 +210,28 @@ length_vs_mass %>%
   geom_point() +
   geom_smooth(method = "lm")
 
+#mean of ln_lmr vs altitude 
+length_vs_mass %>% 
+  filter(Genus == "Turdus") %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude,
+    color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  xlim(c(0,1700))
+
+#mean of ln_lmr vs altitude 
+length_vs_mass %>% 
+  filter(Genus == "Turdus") %>% 
+  group_by(Species) %>% 
+  summarize(lmr = mean(length_mass_ratio, na.rm=TRUE),
+            altitude = mean(altitude, na.rm=TRUE)) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point(aes(color = Species), size=5) +
+  geom_smooth(method = "lm")
 
 #table of mean_ln_lmr and mean_altitude passeriformes
 passeriformes_means<-

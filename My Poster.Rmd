@@ -3,7 +3,7 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(tidyverse)
 library(ggrepel)
 
@@ -71,21 +71,23 @@ ggplot(data = length_vs_mass) +
     y = length_mass_ratio, 
     x = altitude)
   )
-
 ```
 
--   We ran our mass to length ratio with altitude and found we had very messy data
+Figure 1. We ran our mass to length ratio with altitude and found we had very messy data
 
-```{r, echo=FALSE, warning = FALSE}
+```{r echo=FALSE, fig.height=3, fig.width=5, warning=FALSE}
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
-    x = length_mass_ratio), bins = 100)
+    x = length_mass_ratio), bins = 50, boundary = 0)
+```
+
+```{r}
 #seperate by order
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
-    x = length_mass_ratio), bins = 100) +
-  facet_wrap(~Order)
+    x = length_mass_ratio), bins = 50, boundary = 0) +
+  facet_wrap(~Order, ncol = 5)
 ```
 
 -   Here we noticed that our data were severely right skewed
@@ -101,7 +103,7 @@ ggplot(data = length_vs_mass) +
   facet_wrap(~Order)
 ```
 
--   We corrected the skew in our data by taking the natural log of our data points
+-   We corrected the skew in our data by transforming it by taking the natural log of our data points
 
 ```{r, echo=FALSE, warning = FALSE}
 length_vs_mass %>% 
