@@ -19,8 +19,7 @@ Ecogeographic rules explain variation within a species using biogeography. Allen
 
 ## Methods
 
-Using R studio, we created our length to mass ratio data by
-dividing length by mass for every bird in the Atlantic Bird's Data Set that had a recorded mass and length. Using a frequency test on our lmr variable, we tested for normal distribution. We found we had a serious right skew. To correct for this, we took the natural log of each data point. Then we separated out each Order into its' own graph and found that Passeriformes made up a disproportionately large part of the data set. We focused in on this order and made a scatterplot of the means of each order, family, genus and species vs altitude. We added a trendline which showed a slight upward trend. We then removed all of the species found at altitudes of less than 1000 and made another scatterplot. This revealed a much sharper positive correlation. Then we performed a t-test comparing means above 1000 and means below 1000 and found (enter what we find)
+Using R studio, we created our length to mass ratio data by dividing length by mass for every bird in the Atlantic Bird's Data Set that had a recorded mass and length. Using a frequency test on our lmr variable, we tested for normal distribution. We found we had a serious right skew. To correct for this, we took the natural log of each data point. Then we separated out each Order into its' own graph and found that Passeriformes made up a disproportionately large part of the data set. We focused in on this order and made a scatterplot of the means of each order, family, genus and species vs altitude. We added a trendline which showed a slight upward trend. We then removed all of the species found at altitudes of less than 1000 and made another scatterplot. This revealed a much sharper positive correlation. Then we performed a t-test comparing means above 1000 and means below 1000 and found (enter what we find)
 
 ## Results
 
@@ -32,6 +31,8 @@ We can see that there is a correlation between the mean lmr of bird species with
 
 -   Blackburn T, Ruggiero A. Latitude, elevation and body mass variation in Andean passerine birds. Global Ecology and Biography 2001 (cited 2022 Feb 18); 10: 245-259.
 
+-   Hasui, É., Metzger, J.P., Pimentel, R.G., Silveira, L.F., Bovo, A.A.d.A., Martensen, A.C., Uezu, A., Regolin, A.L., Bispo de Oliveira, A.Â., Gatto, C.A.F.R., Duca, C., Andretti, C.B., Banks-Leite, C., Luz, D., Mariz, D., Alexandrino, E.R., de Barros, F.M., Martello, F., Pereira, I.M.d.S., da Silva, J.N., Ferraz, K.M.P.M.d.B., Naka, L.N., dos Anjos, L., Efe, M.A., Pizo, M.A., Pichorim, M., Gonçalves, M.S.S., Cordeiro, P.H.C., Dias, R.A., Muylaert, R.d.L., Rodrigues, R.C., da Costa, T.V.V., Cavarzere, V., Tonetti, V.R., Silva, W.R., Jenkins, C.N., Galetti, M. and Ribeiro, M.C. (2018), ATLANTIC BIRDS: a data set of bird species from the Brazilian Atlantic Forest. Ecology, 99: 497-497. <https://doi.org/10.1002/ecy.2119>
+
 -   Lamichhaney S, Han F, Berglund J, Wang C, Almén MS, Webster MT, Grant BR, Grant PR, Andersson L. A beak size locus in Darwin's finches facilitated character displacement during a drought. Science. 2016 (cited 2022 Feb 18);352(6284):470-4
 
 -   Landmann A, Winding N. Guild Organization and Morphology of High-Altitude Granivorous and Insectivorous Birds: Convergent Evolution in an Extreme Environment. Oikos. 2995 (cited 2022 Feb 18);73(2):237-250.
@@ -39,3 +40,7 @@ We can see that there is a correlation between the mean lmr of bird species with
 -   Sun Y, Li M, Song G, Lei F, Li D, Wu Y. The Role of Climate Factors in Geographic Variation in Body Mass and Wing Length in a Passerine Bird. Avian Res. 2017 (cited 2022 Feb 19); 8, 1.
 
 ## Acknowledgments
+
+We would like to thank the original authors of the Atlantic Birds Data Set and all of those who helped compile it through museum collections, online data bases, published sources, and unpublished reports, as well as the people out out in the field who originally collected this data.
+
+We also would like to thank Dr. Merkord for his guidance with coding and data analyse.
