@@ -44,46 +44,22 @@ length_vs_mass <- mutate(bird_data,
 
 # plots -------------------------------------------------------------------
 
+
 #ggplot Length Mass Ratio vs Altitude
 ggplot(data = length_vs_mass) +
   geom_point(mapping = aes(
-    x = length_mass_ratio, 
-    y = altitude)
+    y = length_mass_ratio, 
+    x = altitude)
   )
 
 #ggplot Length Mass Ratio vs Altitude (color) 
 ggplot(data = length_vs_mass) +
   geom_point(mapping = aes(
-    x = length_mass_ratio, 
-    y = altitude, 
+    y = length_mass_ratio, 
+    x = altitude, 
     color = Order), 
     alpha = 0.1
   )
-
-#ggplot mass vs altitude (color)
-ggplot(data = length_vs_mass) +
-  geom_point(mapping = aes(
-    x = body_mass_g, 
-    y = altitude, 
-    color = Order), 
-    alpha = 0.1
-  )
-
-
-#ggplot Wing Length vs Altitude (color)
-ggplot(data = length_vs_mass) +
-  geom_point(mapping = aes(
-    x = wing_length_mm, 
-    y = altitude,
-    color = Order),
-    alpha = 0.1
-  )
-
-
-#table of order frequency
-order_freq<-length_vs_mass%>%
-  group_by(Order)%>%
-  summarize(n = n())
 
 #facet wrap graph by order
 ggplot(data = length_vs_mass) +
@@ -92,15 +68,8 @@ ggplot(data = length_vs_mass) +
     y = altitude))+
   facet_wrap(~Order)
 
-#density plot by order
-ggplot(data = length_vs_mass) +
-  geom_density(mapping = aes(
-    x = length_mass_ratio, 
-    y = altitude))+
-  facet_wrap(~Order)
 
-
-# length vs mass ----------------------------------------------------------
+# ln of data ----------------------------------------------------------
 
 #log of length_mass_ratio to correct right skew 
 length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
@@ -116,6 +85,9 @@ ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
     x = ln_lmr), bins = 100) + 
   facet_wrap(~Order,scales = "free_y")
+
+
+# length mass lmr plots ---------------------------------------------------
 
 #length mass plot of Anseriformes 
 length_vs_mass %>% 
@@ -169,6 +141,9 @@ length_vs_mass %>%
     x = altitude)) +
   geom_point() +
   geom_smooth(method = "loess")
+
+
+# passeriformes mean data -------------------------------------------------
 
 #fit line with altitude > 1000 Passeriformes
 length_vs_mass %>% 
@@ -272,16 +247,3 @@ passeriformes_means %>%
   t.test(ln_lmr ~ hilo, data = .)
 
 
-
-
-  filter(mean_altitude>1000,) %>%
-  print()
-passeriformes_means %>%
-  filter(mean_altitude<1000,) %>%
-  print()
-sm_lg_means<- passeriformes_means%>%
-  group_by(mean_altitude>1000, mean_altitude<1000)
-
-#two sample t-test on mean values over and under 1000
-passeriformes_means %>%
-  t.test()
