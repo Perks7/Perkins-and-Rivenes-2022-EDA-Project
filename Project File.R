@@ -44,6 +44,11 @@ length_vs_mass <- mutate(bird_data,
 
 # plots -------------------------------------------------------------------
 
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = length_mass_ratio), bins = 100)
+ 
 
 #ggplot Length Mass Ratio vs Altitude
 ggplot(data = length_vs_mass) +

@@ -5,6 +5,35 @@ output: github_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(ggrepel)
+
+file_url<-"https://esajournals.onlinelibrary.wiley.com/action/downloadSupplement?doi=10.1002%2Fecy.2647&file=ecy2647-sup-0001-DataS1.zip"
+file_name <- basename(file_url)
+
+if (!dir.exists("bird_data")) dir.create("bird_data")
+
+#if (!file.exists(file_name))
+download.file(file_url, destfile = "bird_data/bird_data.zip", mode = "wb")
+unzip("bird_data/bird_data.zip", overwrite = TRUE, exdir = "bird_data")
+
+#reading and renaming data
+bird_data<-read_csv("bird_data/ATLANTIC_BIRD_TRAITS_completed_2018_11_d05.csv")
+
+#renaming variables 
+bird_data <- rename(bird_data, 
+                    body_mass_g = Body_mass.g., 
+                    body_length_mm = Body_length.mm., 
+                    altitude = Altitude, 
+                    wing_length_mm = Wing_length.mm.
+                    )
+
+#new variable
+length_vs_mass <- select(bird_data, body_length_mm, body_mass_g)
+
+length_vs_mass <- mutate(bird_data, 
+                         length_mass_ratio = body_length_mm / body_mass_g)
+
+
 ```
 
 # Title
@@ -19,9 +48,82 @@ Ecogeographic rules explain variation within a species using biogeography. Allen
 
 ## Methods
 
-Using R studio, we created our length to mass ratio data by dividing length by mass for every bird in the Atlantic Bird's Data Set that had a recorded mass and length. Using a frequency test on our lmr variable, we tested for normal distribution. We found we had a serious right skew. To correct for this, we took the natural log of each data point. Then we separated out each Order into its' own graph and found that Passeriformes made up a disproportionately large part of the data set. We focused in on this order and made a scatterplot of the means of each order, family, genus and species vs altitude. We added a trendline which showed a slight upward trend. We then removed all of the species found at altitudes of less than 1000 and made another scatterplot. This revealed a much sharper positive correlation. Then we performed a t-test comparing means above 1000 and means below 1000 and found (enter what we find)
+where did data come from
+
+show how birds were measured/captured
+
+Using R studio, we created our length to mass ratio data by dividing length by mass for every bird in the Atlantic Bird's Data Set that had a recorded mass and length. We created a histogram for our lmr variable, to test for normal distribution. We found we had a serious right skew. To correct for this, we took the natural log of each data point. Then we separated out each Order into its' own graph and found that Passeriformes made up a disproportionately large part of the data set. We focused in on this order and made a scatterplot of the means of each order, family, genus and species vs altitude. We added a trendline which showed a slight upward trend. We then removed all of the species found at altitudes of less than 1000 and made another scatterplot. This revealed a much sharper positive correlation. Then we performed a t-test comparing means above 1000 and means below 1000 and found (enter what we find)
 
 ## Results
+
+one sentence description of conclusion
+
+```{r sestup, include = true}
+#ggplot Length Mass Ratio vs Altitude
+ggplot(data = length_vs_mass) +
+  geom_point(mapping = aes(
+    y = length_mass_ratio, 
+    x = altitude)
+  )
+
+```
+
+```{r}
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order)
+
+```
+
+```{r}
+#testing for normal distribution of length_mass_ratio
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = length_mass_ratio), bins = 100)
+#seperate by order
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = length_mass_ratio), bins = 100) +
+  facet_wrap(~Order)
+```
+
+```{r}
+#log of length_mass_ratio to correct right skew 
+length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
+
+#testing for normal distribution of ln_lmr
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100)+ 
+  facet_wrap(~Order)
+```
+
+```{r}
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+
+length_vs_mass %>% 
+  filter(
+    Order=="Passeriformes",
+    Family=="Furnariidae",
+    altitude > 1000
+  ) %>% 
+  ggplot(mapping = aes(
+    y = ln_lmr, 
+    x = altitude)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
 
 ## Discussion
 
