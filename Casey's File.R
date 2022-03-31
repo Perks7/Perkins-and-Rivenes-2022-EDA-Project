@@ -162,7 +162,11 @@ mean_table<-length_vs_mass%>% mutate(mean_ln_lmr = mean)
 # t-test for mean ln_lmr
 t.test()
 
-
+length_vs_mass %>% 
+  ggplot() +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 100) + 
+  facet_wrap(~ Order)
     
 #notes
 #

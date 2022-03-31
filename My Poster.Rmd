@@ -32,6 +32,8 @@ length_vs_mass <- select(bird_data, body_length_mm, body_mass_g)
 
 length_vs_mass <- mutate(bird_data, 
                          length_mass_ratio = body_length_mm / body_mass_g)
+#log of length_mass_ratio to correct right skew 
+length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 
 
 ```
@@ -44,21 +46,27 @@ Dr. Chris Merkord
 
 ## Introduction
 
-Ecogeographic rules explain variation within a species using biogeography. Allen's rule states that body surface-area-to-volume ratio for animals varies with the average temperature of their habitat. Typically, latitude is used as the temperature variable. However, this rule should hold true over any type of temperature variable. We want to know, is there a correlation between altitude and ratio of mass to length of birds in The Atlantic Forest? To answer this question, we will be using the Atlantic Bird Traits data set. This data set has been compiled over two centuries by tens of researchers (1820-2018) and includes data on 80% of the bird populations found in The Atlantic Forest. We will perform an exploratory analysis on this data set looking for correlations between altitude and ratio of mass to length of bird species. Based on other similar analyses, we expect to see a positive correlation between these variables.
+-   We decided to explore Allen's rule: body surface-area-to-volume ratio for animals varies with the average temperature of a creature's habitat.
+
+-   We used data on birds fount in the Atlantic Forest of South America to explore the connection between altitude and length to mass ratios
+
+    ![lmr = -0.13, altitude = 1 1188 m](https://nas-national-prod.s3.amazonaws.com/Masked_Duck_KK_APA_2011_18324_145923_RonBielefeld.jpg "Masked Duck (Nomonyx dominicus)")
 
 ## Methods
 
-where did data come from
+-   Our data came from The Atlantic Bird's Data Set; a data set complied over decades by many scientists.
 
-show how birds were measured/captured
+-   In bird data collection, birds are typically caught in a mist net
 
-Using R studio, we created our length to mass ratio data by dividing length by mass for every bird in the Atlantic Bird's Data Set that had a recorded mass and length. We created a histogram for our lmr variable, to test for normal distribution. We found we had a serious right skew. To correct for this, we took the natural log of each data point. Then we separated out each Order into its' own graph and found that Passeriformes made up a disproportionately large part of the data set. We focused in on this order and made a scatterplot of the means of each order, family, genus and species vs altitude. We added a trendline which showed a slight upward trend. We then removed all of the species found at altitudes of less than 1000 and made another scatterplot. This revealed a much sharper positive correlation. Then we performed a t-test comparing means above 1000 and means below 1000 and found (enter what we find)
+    ![](https://talesfromawanderingalbatross.files.wordpress.com/2013/06/mgwa-in-mist-net.jpg)
+
+-   Then various measurements are taken. We are interested in the length to mass ratio
 
 ## Results
 
-one sentence description of conclusion
+-   one sentence description of conclusion
 
-```{r sestup, include = true}
+```{r, echo=FALSE, warning = FALSE}
 #ggplot Length Mass Ratio vs Altitude
 ggplot(data = length_vs_mass) +
   geom_point(mapping = aes(
@@ -68,16 +76,9 @@ ggplot(data = length_vs_mass) +
 
 ```
 
-```{r}
-#testing for normal distribution of length_mass_ratio
-ggplot(data = length_vs_mass) +
-  geom_histogram(mapping = aes(
-    x = ln_lmr), bins = 100)+ 
-  facet_wrap(~Order)
+-   we ran our mass to length ratio with altitude and found we had very messy data
 
-```
-
-```{r}
+```{r, echo=FALSE, warning = FALSE}
 #testing for normal distribution of length_mass_ratio
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
@@ -89,7 +90,9 @@ ggplot(data = length_vs_mass) +
   facet_wrap(~Order)
 ```
 
-```{r}
+-   here we noticed that our data were severely right skewed
+
+```{r, echo=FALSE, warning = FALSE}
 #log of length_mass_ratio to correct right skew 
 length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 
@@ -100,7 +103,9 @@ ggplot(data = length_vs_mass) +
   facet_wrap(~Order)
 ```
 
-```{r}
+-   we corrected the skew in our data by taking the natural log of our data points
+
+```{r, echo=FALSE, warning = FALSE}
 length_vs_mass %>% 
   filter(
     Order=="Passeriformes",
@@ -125,9 +130,65 @@ length_vs_mass %>%
   geom_smooth(method = "lm")
 ```
 
-## Discussion
+-   we plotted the mean lmr for each genus/species and saw a slight upward trend which intensified when we looked exclusivly at altitudes higher than 1000
 
-We can see that there is a correlation between the mean lmr of bird species within order Passeriformes and the altitude at which they are found. Our graph suggests that the greater the altitude a bird species is found at, the greater their mean lmr is. This trend follows the trend seen in birds examined latitudinally as seen in many other research projects on birds. Essentially, what we see is that birds that are fat and fluffy tend to live at higher elevations that birds that are long and skinny. However, it is important to note that this trend was far more apparent in birds over 1000 in elevation. There are a couple of possible explanations for this. Generally, at higher elevations, there are colder temperatures, so birds require a higher body to length ratio to stay warm. However, birds from birds found in more extreme climates, we would expect to see greater variation in morphology. For example, many bird species that live in elevations below 1000 can be found at 100, 500, or 800 easily. However, birds that are found in more extreme climates (higher elevations) tend to be more adapted for their specific environment. Allen's rule suggest that any morphological trait (such as appendage thickness or hair length) should also vary based on temperature. A future analysis we would like to do is see if this trend holds true for other morphological bird characteristics.  
+    ```{r, echo=FALSE, warning = FALSE}
+    passeriformes_means<-
+      length_vs_mass %>% 
+      filter(!is.na(altitude), !is.na(ln_lmr)) %>% 
+      group_by(Order, Family, Genus, Species) %>% 
+      summarize(
+        ln_lmr = mean(ln_lmr),
+        altitude = mean(altitude)
+      )  
+    mean_hilo <-
+      passeriformes_means %>% 
+      mutate(hilo = ifelse(altitude>1000, "Above 1000 m", "Below 1000 m")) %>% 
+      group_by(hilo) %>% 
+      summarize(
+        mean = mean(ln_lmr),
+        # sd = sd(ln_lmr, na.rm = TRUE),
+        # sem = sd(ln_lmr)/sqrt(n()),
+        # upper = ln_lmr + 2*sem,
+        # lower = ln_lmr - 2*sem
+      )
+
+    passeriformes_means %>% 
+      mutate(hilo = ifelse(altitude>1000, "Above 1000 m", "Below 1000 m")) %>%
+      ggplot(aes(x = ln_lmr)) +
+      geom_histogram() +
+      geom_vline(aes(xintercept = mean), data = mean_hilo,
+                 linetype = "dashed", size = 2, color = "red") +
+      facet_wrap(~ hilo, ncol = 1, scales = "free_y")
+
+    ```
+
+-   we took the mean lmr of birds found over 1000 m and birds found under 1000 and found the means were different
+
+    ```{r, include=FALSE, warning = FALSE}
+    passeriformes_means %>% 
+      mutate(hilo = ifelse(altitude>1000, "Above 1000 m", "Below 1000 m")) %>% 
+      t.test(ln_lmr ~ hilo, data = .)
+    #antilog of hi
+    exp(2.067247)
+
+    #antilog of low
+    exp(1.647261)
+    ```
+
+-   The mean lmr of birds found above 1000 m = 7.9 while the mean lmr of birds found below 1000 m = 5.2. A Welch's Two Sample t-test found t(76) = 3.6, p =0.0005.
+
+## Discussion 
+
+-   Our analysis suggests that the greater the altitude a bird species is found at, the greater their mean lmr is.
+
+-   This trend follows the trend seen in birds examined latitudinally as seen in many other research projects on birds.
+
+-   Essentially, what we see is that birds that are fat and fluffy tend to live at higher elevations that birds that are long and skinny.
+
+-   A possible explination for this is that birds that found in more extreme climates (higher elevations) are more adapted for their specific environment.
+
+-    Allen's rule suggest that any morphological trait (such as appendage thickness or hair length) should also vary based on temperature. A future analysis we would like to do is see if this trend holds true for other morphological bird characteristics.  
 
 ## References
 
@@ -143,6 +204,6 @@ We can see that there is a correlation between the mean lmr of bird species with
 
 ## Acknowledgments
 
-We would like to thank the original authors of the Atlantic Birds Data Set and all of those who helped compile it through museum collections, online data bases, published sources, and unpublished reports, as well as the people out out in the field who originally collected this data.
+-   We would like to thank the original authors of the Atlantic Birds Data Set and all of those who helped compile it through museum collections, online data bases, published sources, and unpublished reports, as well as the people out out in the field who originally collected this data.
 
-We also would like to thank Dr. Merkord for his guidance with coding and data analyse.
+-   We also would like to thank Dr. Merkord for his guidance with coding and data analyse.

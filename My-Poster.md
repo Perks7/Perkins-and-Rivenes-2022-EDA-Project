@@ -7,68 +7,111 @@ Dr. Chris Merkord
 
 ## Introduction
 
-Ecogeographic rules explain variation within a species using
-biogeography. Allen’s rule states that body surface-area-to-volume ratio
-for animals varies with the average temperature of their habitat.
-Typically, latitude is used as the temperature variable. However, this
-rule should hold true over any type of temperature variable. We want to
-know, is there a correlation between altitude and ratio of mass to
-length of birds in The Atlantic Forest? To answer this question, we will
-be using the Atlantic Bird Traits data set. This data set has been
-compiled over two centuries by tens of researchers (1820-2018) and
-includes data on 80% of the bird populations found in The Atlantic
-Forest. We will perform an exploratory analysis on this data set looking
-for correlations between altitude and ratio of mass to length of bird
-species. Based on other similar analyses, we expect to see a positive
-correlation between these variables.
+-   We decided to explore Allen’s rule: body surface-area-to-volume
+    ratio for animals varies with the average temperature of a
+    creature’s habitat.
+
+-   We used data on birds fount in the Atlantic Forest of South America
+    to explore the connection between altitude and length to mass ratios
+
+    ![lmr = -0.13, altitude = 1 1188
+    m](https://nas-national-prod.s3.amazonaws.com/Masked_Duck_KK_APA_2011_18324_145923_RonBielefeld.jpg "Masked Duck (Nomonyx dominicus)")
 
 ## Methods
 
-Using R studio, we created our length to mass ratio data by dividing
-length by mass for every bird in the Atlantic Bird’s Data Set that had a
-recorded mass and length. Using a frequency test on our lmr variable, we
-tested for normal distribution. We found we had a serious right skew. To
-correct for this, we took the natural log of each data point. Then we
-separated out each Order into its’ own graph and found that
-Passeriformes made up a disproportionately large part of the data set.
-We focused in on this order and made a scatterplot of the means of each
-order, family, genus and species vs altitude. We added a trendline which
-showed a slight upward trend. We then removed all of the species found
-at altitudes of less than 1000 and made another scatterplot. This
-revealed a much sharper positive correlation. Then we performed a t-test
-comparing means above 1000 and means below 1000 and found (enter what we
-find)
+-   Our data came from The Atlantic Bird’s Data Set; a data set complied
+    over decades by many scientists.
+
+-   In bird data collection, birds are typically caught in a mist net
+
+    ![](https://talesfromawanderingalbatross.files.wordpress.com/2013/06/mgwa-in-mist-net.jpg)
+
+-   Then various measurements are taken. We are interested in the length
+    to mass ratio
 
 ## Results
 
+-   one sentence description of conclusion
+
+![](My-Poster_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+-   we ran our mass to length ratio with altitude and found we had very
+    messy data
+
+![](My-Poster_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->![](My-Poster_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+
+-   here we noticed that our data were severely right skewed
+
+![](My-Poster_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+-   we corrected the skew in our data by taking the natural log of our
+    data points
+
+<!-- -->
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+![](My-Poster_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+![](My-Poster_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+
+-   we plotted the mean lmr for each genus/species and saw a slight
+    upward trend which intensified when we looked exclusivly at
+    altitudes higher than 1000
+
+        ## `summarise()` has grouped output by 'Order', 'Family', 'Genus'. You can
+        ## override using the `.groups` argument.
+        ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ![](My-Poster_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+-   we took the mean lmr of birds found over 1000 m and birds found
+    under 1000 and found the means were different
+
+-   The mean lmr of birds found above 1000 m = 7.9 while the mean lmr of
+    birds found below 1000 m = 5.2. A Welch’s Two Sample t-test found
+    t(76) = 3.6, p =0.0005.
+
 ## Discussion
 
-We can see that there is a correlation between the mean lmr of bird
-species within order Passeriformes and the altitude at which they are
-found. Our graph suggests that the greater the altitude a bird species
-is found at, the greater their mean lmr is. This trend follows the trend
-seen in birds examined latitudinally as seen in many other research
-projects on birds. Essentially, what we see is that birds that are fat
-and fluffy tend to live at higher elevations that birds that are long
-and skinny. However, it is important to note that this trend was far
-more apparent in birds over 1000 in elevation. There are a couple of
-possible explanations for this. Generally, at higher elevations, there
-are colder temperatures, so birds require a higher body to length ratio
-to stay warm. However, birds from birds found in more extreme climates,
-we would expect to see greater variation in morphology. For example,
-many bird species that live in elevations below 1000 can be found at
-100, 500, or 800 easily. However, birds that are found in more extreme
-climates (higher elevations) tend to be more adapted for their specific
-environment. Allen’s rule suggest that any morphological trait (such as
-appendage thickness or hair length) should also vary based on
-temperature. A future analysis we would like to do is see if this trend
-holds true for other morphological bird characteristics.  
+-   Our analysis suggests that the greater the altitude a bird species
+    is found at, the greater their mean lmr is.
+
+-   This trend follows the trend seen in birds examined latitudinally as
+    seen in many other research projects on birds.
+
+-   Essentially, what we see is that birds that are fat and fluffy tend
+    to live at higher elevations that birds that are long and skinny.
+
+-   A possible explination for this is that birds that found in more
+    extreme climates (higher elevations) are more adapted for their
+    specific environment.
+
+-   Allen’s rule suggest that any morphological trait (such as appendage
+    thickness or hair length) should also vary based on temperature. A
+    future analysis we would like to do is see if this trend holds true
+    for other morphological bird characteristics.  
 
 ## References
 
 -   Blackburn T, Ruggiero A. Latitude, elevation and body mass variation
     in Andean passerine birds. Global Ecology and Biography 2001 (cited
     2022 Feb 18); 10: 245-259.
+
+-   Hasui, É., Metzger, J.P., Pimentel, R.G., Silveira, L.F., Bovo,
+    A.A.d.A., Martensen, A.C., Uezu, A., Regolin, A.L., Bispo de
+    Oliveira, A.Â., Gatto, C.A.F.R., Duca, C., Andretti, C.B.,
+    Banks-Leite, C., Luz, D., Mariz, D., Alexandrino, E.R., de Barros,
+    F.M., Martello, F., Pereira, I.M.d.S., da Silva, J.N., Ferraz,
+    K.M.P.M.d.B., Naka, L.N., dos Anjos, L., Efe, M.A., Pizo, M.A.,
+    Pichorim, M., Gonçalves, M.S.S., Cordeiro, P.H.C., Dias, R.A.,
+    Muylaert, R.d.L., Rodrigues, R.C., da Costa, T.V.V., Cavarzere, V.,
+    Tonetti, V.R., Silva, W.R., Jenkins, C.N., Galetti, M. and Ribeiro,
+    M.C. (2018), ATLANTIC BIRDS: a data set of bird species from the
+    Brazilian Atlantic Forest. Ecology, 99: 497-497.
+    <https://doi.org/10.1002/ecy.2119>
 
 -   Lamichhaney S, Han F, Berglund J, Wang C, Almén MS, Webster MT,
     Grant BR, Grant PR, Andersson L. A beak size locus in Darwin’s
@@ -85,3 +128,12 @@ holds true for other morphological bird characteristics.  
     Bird. Avian Res. 2017 (cited 2022 Feb 19); 8, 1.
 
 ## Acknowledgments
+
+-   We would like to thank the original authors of the Atlantic Birds
+    Data Set and all of those who helped compile it through museum
+    collections, online data bases, published sources, and unpublished
+    reports, as well as the people out out in the field who originally
+    collected this data.
+
+-   We also would like to thank Dr. Merkord for his guidance with coding
+    and data analyse.
