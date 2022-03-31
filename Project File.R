@@ -210,3 +210,25 @@ length_vs_mass %>%
     x = altitude)) +
   geom_point() +
   geom_smooth(method = "lm")
+
+#table of mean_ln_lmr and mean_altitude passeriformes
+passeriformes_means<-length_vs_mass %>% 
+  group_by(Order, Family, Genus, Species) %>% 
+  summarize(ln_lmr = mean(ln_lmr),
+            altitude = mean(altitude)) %>%
+  mutate(mean_ln_lmr = mean(ln_lmr),
+            mean_altitude = mean(altitude))
+
+#filter smaller and larger means
+passeriformes_means %>%
+  filter(mean_altitude>1000,) %>%
+  print()
+passeriformes_means %>%
+  filter(mean_altitude<1000,) %>%
+  print()
+sm_lg_means<- passeriformes_means%>%
+  group_by(mean_altitude>1000, mean_altitude<1000)
+
+#two sample t-test on mean values over and under 1000
+passeriformes_means %>%
+  t.test()
