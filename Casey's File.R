@@ -176,7 +176,7 @@ length_vs_mass %>%
     
 
 # Formatting graphs -------------------------------------------------------
-
+#check for normal dist
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
     x = length_mass_ratio), bins = 50, boundary = 0) +
@@ -185,6 +185,15 @@ ggplot(data = length_vs_mass) +
   theme_gray(base_size = 24) +
   ggsave("birds_lmr_histogram.png", units="in", height=8, width=12, dpi = 300)
   
+#Normal dist with ln
+ggplot(data = length_vs_mass) +
+  geom_histogram(mapping = aes(
+    x = ln_lmr), bins = 50, boundary = 0)+
+  labs(y = "Number of Birds", 
+       x = "Length:Mass") +
+  theme_gray(base_size = 24) +
+  ggsave("birds_ln_lmr_histogram.png", units="in", height=8, width=12, dpi = 300)
+
 #seperate by order
 ggplot(data = length_vs_mass) +
   geom_histogram(mapping = aes(
