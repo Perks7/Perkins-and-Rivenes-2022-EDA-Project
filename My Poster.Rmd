@@ -38,29 +38,49 @@ length_vs_mass <-mutate(length_vs_mass, ln_lmr = log(length_mass_ratio))
 
 ```
 
-# Title
+**Notes for code:**
+
+-   **show tidied code, spaces, comments, make it readable, be CONSISTANT**
+
+-   **filter, mutate, summarize, join (combine data), variables in code and show created variables**
+
+-   **use: bar chart, histogram, multiple variables (scatter plot). Label well.**
+
+-   **Do a mean and a confidence interval**
+
+-   **Include a readme with abstract, author name, and table of content**
+
+# **Morphological Analysis of Birds in the Atlantic Forest of South America**
 
 Casey Perkins, Bryn Rivenes
 
-Dr. Chris Merkord
-
 ## Introduction
 
--   We decided to explore Allen's rule: body surface-area-to-volume ratio for animals varies with the average temperature of a creature's habitat.
+-   **Allen's Rule**: body surface area to volume ratio for animals varies with the average temperature of a creature's habitat  (Allen A, 1877)​
 
--   We used data on birds fount in the Atlantic Forest of South America to explore the connection between altitude and length to mass ratios
+-   The lower the surface area, the less heat can escape, so animals at higher altitudes should have less surface area and a higher body mass​
+
+-   However, some studies have shown this rule to be inaccurate (Alho J, et al. 2010)​
+
+-   We set out to test **Allen's Rule** using an existing data set of bird morphological traits
 
     ![lmr = -0.13, altitude = 1 1188 m](https://nas-national-prod.s3.amazonaws.com/Masked_Duck_KK_APA_2011_18324_145923_RonBielefeld.jpg "Masked Duck (Nomonyx dominicus)")
 
 ## Methods
 
--   Our data came from The Atlantic Bird's Data Set; a data set complied over decades by many scientists.
+-   Our data came from **The Atlantic Bird's Data Set**; a data set of bird morphological traits and locations complied over decades by many scientists through museum collections, online data bases, published sources, and unpublished reports for data analysis (Hasui E, et al. 2017)​
 
--   In bird data collection, birds are typically caught in a mist net
+-   It includes data from **72,483 individual birds** and **780 species**​
+
+-   The Atlantic Forest is located mostly on the East coast of Brazil, with some of it stretching into Argentina and Paraguay​
+
+-   We use the length to mass ratio as a proxy for body surface-area-to-volume ratio
 
     ![](https://talesfromawanderingalbatross.files.wordpress.com/2013/06/mgwa-in-mist-net.jpg)
 
--   Then various measurements are taken. We are interested in the length to mass ratio
+-   **discuss getting data/how it was collected and analyzing data**
+
+-   **discuss/cite R and pkgs**
 
 ## Results
 
@@ -181,17 +201,23 @@ length_vs_mass %>%
 
 -   The mean lmr of birds found above 1000 m = 7.9 while the mean lmr of birds found below 1000 m = 5.2. A Welch's Two Sample t-test found t(76) = 3.6, p =0.0005.
 
-## Discussion 
+-   **Text describing what we did and what it means then back up with figure/graph**
 
--   Our analysis suggests that the greater the altitude a bird species is found at, the greater their mean lmr is.
+-   **add figure legends to each graph (Fig. 1)**
 
--   This trend follows the trend seen in birds examined latitudinally as seen in many other research projects on birds.
+## Discussion
 
--   Essentially, what we see is that birds that are fat and fluffy tend to live at higher elevations that birds that are long and skinny.
+-   We predicted length mass ratio would decrease with elevation however, our analysis and t-test show an increase in length mass ratio with increased elevation​
 
--   A possible explination for this is that birds that found in more extreme climates (higher elevations) are more adapted for their specific environment.
+-   This is the exact **opposite** of what we would **e**xpect to see according to **Allen's Rule** ​
 
--    Allen's rule suggest that any morphological trait (such as appendage thickness or hair length) should also vary based on temperature. A future analysis we would like to do is see if this trend holds true for other morphological bird characteristics.  
+-   Other studies have found similar results that contradict **Allen's Rule** and suggest that the body surface area to volume ratio has a genetic basis rather than an environmental one (Alho J, et al. 2010)
+
+-   **Restate findings briefly**
+
+-   **talk about what is MEANS**
+
+-   **talk about what we could do with these findings in the future/future experiments**
 
 ## References
 
@@ -204,6 +230,10 @@ length_vs_mass %>%
 -   Landmann A, Winding N. Guild Organization and Morphology of High-Altitude Granivorous and Insectivorous Birds: Convergent Evolution in an Extreme Environment. Oikos. 2995 (cited 2022 Feb 18);73(2):237-250.
 
 -   Sun Y, Li M, Song G, Lei F, Li D, Wu Y. The Role of Climate Factors in Geographic Variation in Body Mass and Wing Length in a Passerine Bird. Avian Res. 2017 (cited 2022 Feb 19); 8, 1.
+
+-   **add citations for R, and pkgs used.**
+
+-   **cite every source in the text**
 
 ## Acknowledgments
 
